@@ -12,9 +12,9 @@ function App() {
       <body>
           <header>
               <nav>
-                  <div id="logo">NTNU Reviews</div>
+                  <a href="" id="logo">NTNU Reviews</a>
 
-                  <div class="box">Info</div>
+                  <a href="" class="box">Info</a>
               </nav>
           </header>
 
