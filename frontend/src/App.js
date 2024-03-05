@@ -1,38 +1,40 @@
 import './App.css';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Subject from './Subject';
 
 function App() {
   return (
-  <html lang="en">
-      <head>
-          <meta charset="UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>NTNU-reviews</title>
-          <link rel="stylesheet" href="style.css" />
-      </head>
-      <body>
-          <header>
-              <nav>
-                  <a href="" id="logo">NTNU Reviews</a>
+    <div>
+      <Router>
+        <header>
+          <nav>
+            <Link to="/" id="logo">NTNU Reviews</Link>
 
-                  <a href="" class="box">Info</a>
-              </nav>
-          </header>
+            <Link to="/subject">Info</Link> 
 
-          <main>
-              <div id="search-container">
-                  <input
-                      class="box"
-                      id="search"
-                      type="text"
-                      placeholder="Search Subject: "
-                  />
-              </div>
-          </main>
+          </nav>
+        </header> 
+ 
+        <main>
+          
+          <Routes>
+            <Route path="/" element={
+            <div id="search-container">
+            <input
+              className="box"
+              id="search"
+              type="text" 
+              placeholder="Search Subject: "
+            />
+          </div>} />
 
-          <footer></footer>
-          <script src="script.js"></script>
-      </body>
-  </html>
+            <Route path="/subject" element={<Subject />} />
+          </Routes>
+        </main>
+        <footer></footer>
+      </Router>
+      <script src="script.js"></script>
+    </div>
   );
 }
 
