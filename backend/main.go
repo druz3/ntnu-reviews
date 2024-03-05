@@ -20,29 +20,20 @@ func diagHandler(w http.ResponseWriter, r *http.Request) {
 	output += "URL Parameters: " + LINEBREAK
 
 	if len(r.URL.RawQuery) != 0 {
-		output += "Raw parameter content: " + r.URL.RawQuery + LINEBREAK
-		output += "decomposed parameters: " + LINEBREAK
 		for key, val := range r.URL.Query() {
 			output += "- " + key + "=" + strings.Join(val, ",") + LINEBREAK
 		}
 	}
 
-	output += LINEBREAK + "Headers:" + LINEBREAK
-	for key, values := range r.Header {
-		for _, value := range values {
-			output += key + ": " + value + LINEBREAK
-		}
-	}
+	// content, err := io.ReadAll(r.Body)
+	// if err != nil {
+	// 	http.Error(w, "Error parsing request body.", http.StatusInternalServerError)
+	// }
 
-	content, err := io.ReadAll(r.Body)
-	if err != nil {
-		http.Error(w, "Error parsing request body.", http.StatusInternalServerError)
-	}
+	// output += LINEBREAK + "Body: " + LINEBREAK
+	// output += string(content)
 
-	output += LINEBREAK + "Body: " + LINEBREAK
-	output += string(content)
-
-	_, err = fmt.Fprintf(w, "%v", output)
+	_, err := fmt.Fprintf(w, "%v", output)
 	if err != nil {
 		http.Error(w, "Error when returning output", http.StatusInternalServerError)
 	}
@@ -56,7 +47,7 @@ func main() {
 		port = "8080"
 	}
 
-	http.HandleFunc("/diag", diagHandler)
+	http.HandleFunc("/course", diagHandler)
 
 	log.Println("Starting server on port " + port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
